@@ -34,16 +34,6 @@ void Program::Update() {
     }
     pauseFrames = std::max(pauseFrames - 1, 0);
 
-      // every time the player gains 1000 score, their lives are increased by 1
-     // if the player has 5 lives, they cannot gain another
-      if ( Enemy::score >= LimitScore){
-        LimitScore += 1000;
-        lives = std::min(lives+1,5);
-     }
-    
-
-    
-    
     if (!startup && !paused && !gameOver && pauseFrames <= 0) {
         Enemy::ManageEnemies(player->hitBox);
         StdEnemy::attackReset();
