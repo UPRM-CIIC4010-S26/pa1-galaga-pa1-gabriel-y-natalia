@@ -34,6 +34,16 @@ void Program::Update() {
     }
     pauseFrames = std::max(pauseFrames - 1, 0);
 
+      // every time the player gains 1000 score, their lives are increased by 1
+     // if the player has 5 lives, they cannot gain another
+      if ( Enemy::score >= LimitScore){
+        LimitScore += 1000;
+        lives = std::min(lives+1,5);
+     }
+    
+
+    
+    
     if (!startup && !paused && !gameOver && pauseFrames <= 0) {
         Enemy::ManageEnemies(player->hitBox);
         StdEnemy::attackReset();
@@ -89,7 +99,14 @@ void Program::Draw() {
 void Program::ManageEnemyRespawns() {
     delay = std::max(delay - 1, 0);
 
-    respawnCooldown -= 1;
+    //Respawn cooldown
+    if( Enemy::score >= newLimit){
+        newLimit += 1000;
+         decay = std::min(decay + 1, 8);
+     }
+
+     
+    respawnCooldown -= decay;
     if (respawnCooldown <= 0) {
         respawnCooldown = 1080;
         for (std::pair<std::pair<float, float>, Enemy*>& p : Enemy::enemies) {
@@ -152,7 +169,10 @@ void Program::KeyInputs() {
     if (!paused && !startup && IsKeyPressed('O')) gameOver = !gameOver;
     if (!gameOver && !paused && IsKeyPressed('I')) startup = !startup;
     if (IsKeyPressed('H')) HitBox::drawHitbox = !HitBox::drawHitbox;
-    
+    //when you press ’K’ the score increases by 500
+    if (IsKeyPressed('K')){
+        Enemy::score += 500;
+    }
     if (gameOver && IsKeyPressed(KEY_ENTER)) {
         gameOver = false;
         Reset();

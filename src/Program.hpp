@@ -19,6 +19,9 @@ class Program {
         int delay = 0;
         int lives = 3;
         int pauseFrames = 0;
+        int LimitScore = 1000;
+        int decay = 1;
+        int newLimit = 1000;
 
         bool startup = true;
         bool paused = false;

@@ -18,7 +18,8 @@ class Enemy {
         int health = 1;
         std::pair<float, float> position;
         HitBox hitBox;
-
+        
+        inline static int score = 0;
         inline static float direction = 0.5;
         inline static int directionChange = 100;
         inline static std::vector<std::pair<std::pair<float, float>, Enemy*>> enemies;
