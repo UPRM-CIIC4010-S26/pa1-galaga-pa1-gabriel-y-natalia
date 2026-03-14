@@ -184,6 +184,7 @@ void Program::KeyInputs() {
 
     if (startup && IsKeyPressed(KEY_ENTER)) {
         startup = false;
+        //added background music
         PlaySound(SoundManager::backgroundMusic);
         SetSoundVolume(SoundManager::backgroundMusic, 0.2f);
     }
