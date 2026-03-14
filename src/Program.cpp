@@ -184,6 +184,8 @@ void Program::KeyInputs() {
 
     if (startup && IsKeyPressed(KEY_ENTER)) {
         startup = false;
+        PlaySound(SoundManager::backgroundMusic);
+        SetSoundVolume(SoundManager::backgroundMusic, 0.2f);
     }
 
     if (!startup && !paused && !gameOver && pauseFrames <= 0) player->keyInputs();
